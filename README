@@ -1,0 +1,72 @@
+**CalculadoraPropinas**
+
+El programa se ha desarrollado en Python, utilizando Eclipse. 
+Este programa tiene como objetivo principal calcular un porcentaje de un valor introducido para sumarlo a esta misma cantidad, con el fin de calcular el valor de una propina.
+
+------------------------------------
+
+1. INSTALACIÓN
+
+Requisitos previos instalados. 
+
+- Eclipse IDE for Enterprise, Java and Web Developers (en su última versión)
+- Extensión PyDev para Eclipse
+- Python para Windows
+
+Pasos para ejecutar.
+
+- Descargamos la carpeta "CalculadoraPropinas"
+- Abrimos Eclipse -> File -> Import
+- Seleccionamos General -> Projects from Folder or Archive
+- En el apartado Import source, Directory...
+- Buscamos la carpeta, Seleccionar carpeta
+- Finish
+
+
+2. USO
+
+- Almacenamos valores que se van a introducir en los diferentes campos de Importe factura, Porcentaje propina, Importe propina, Importe Total.
+
+self.importe_factura = tk.DoubleVar()
+        self.porcentaje_propina = tk.StringVar()
+        self.importe_propina = tk.DoubleVar()
+        self.importe_total = tk.DoubleVar()
+
+
+- IMPORTE FACTURA, recoje un importe introducido por el usuario en un cuadro de texto, este se almacena para multiplicarlo y dividirlo posteriormente. 
+
+ttk.Label(root, text="Importe factura").grid(row=0, column=0, padx=10, pady=5, sticky="w")
+        self.entry_factura = ttk.Entry(root, textvariable=self.importe_factura)
+        self.entry_factura.grid(row=0, column=1, padx=10, sticky="ew", pady=5)
+
+
+- PORCENTAJE PROPINA es un desplegable con varios valores para asignar un porcentaje de propina, valor el cual se multiplicará por IMPORTE FACTURA y se dividirá entre 100.
+
+ttk.Label(root, text="Porcentaje propina (%)").grid(row=1, column=0, padx=10, pady=5, sticky="w")
+        self.combo_porcentaje = ttk.Combobox(root, textvariable=self.porcentaje_propina, state="readonly")
+        self.combo_porcentaje['values'] = ["Seleccione porcentaje","5", "10", "15", "20", "25", "30", "40", "50"]
+        self.combo_porcentaje.grid(row=1, column=1, padx=10, pady=5)
+        self.combo_porcentaje.current(0)
+
+
+- IMPORTE PROPINA muestra la operación; IMPORTE FACTURA * PORCENTAJE PROPINA / 100, dando como resultado el importe de una propina.
+
+ttk.Label(root, text="Importe propina").grid(row=2, column=0, padx=10, pady=5, sticky="w")
+        self.label_propina = ttk.Label(root, textvariable=self.importe_propina)
+        self.label_propina.grid(row=2, column=1, padx=10, pady=5)
+
+
+- FACTURA TOTAL muestra la sumatoria de IMPORTE FACTURA + IMPORTE PROPINA, dando como resultado el valor total de una cuenta con el porcentaje sumado de propina a la misma.
+
+ttk.Label(root, text="Factura total").grid(row=3, column=0, padx=10, pady=5, sticky="w")
+        self.label_total = ttk.Label(root, textvariable=self.importe_total)
+        self.label_total.grid(row=3, column=1, padx=10, pady=5)
+
+- CALCULAR es un botón que genera las operaciones logicas indicadas en el código anteriormente mencionado para darnos el valor de cada uno de los campos.
+
+ttk.Button(root, text="Calcular", command=self.calcular_propina_total).grid(row=4, column=0, columnspan=2, padx=10, pady=5)
+
+
+- NUEVA FACTURA es un botón que restablece los campos a su origen para volver a introducir valores en una "Nueva factura".
+
+ttk.Button(root, text="Nueva Factura", command=self.limpiar_campos).grid(row=5, column=0, columnspan=2, padx=10, pady=5)
